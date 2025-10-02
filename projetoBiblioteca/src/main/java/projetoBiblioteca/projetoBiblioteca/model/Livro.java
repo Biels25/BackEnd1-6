@@ -1,12 +1,16 @@
 package projetoBiblioteca.projetoBiblioteca.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import java.util.List;
 
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Livro {
 
     @Id
@@ -22,42 +26,12 @@ public class Livro {
 
     private String genero;
 
-    public Livro() {
-    }
+    @Enumerated(EnumType.STRING)
+    private StatusLivro status;
 
-    public String getAutor() {
-        return autor;
-    }
+    @OneToMany(mappedBy = "livro", cascade = CascadeType.ALL)
+    @JsonIgnore // <-- Anotação corrigida aqui
+    private List<EmprestimoLivro> emprestimoLivros;
 
-    public void setAutor(String autor) {
-        this.autor = autor;
-    }
-
-    public Long getId() {
-        return idLivro;
-    }
-
-    public Long getIsbn() {
-        return isbn;
-    }
-
-    public void setIsbn(Long isbn) {
-        this.isbn = isbn;
-    }
-
-    public String getGenero() {
-        return genero;
-    }
-
-    public void setGenero(String genero) {
-        this.genero = genero;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
+    // Getters and Setters
 }

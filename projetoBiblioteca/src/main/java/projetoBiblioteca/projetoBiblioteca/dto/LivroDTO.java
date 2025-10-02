@@ -1,12 +1,16 @@
 package projetoBiblioteca.projetoBiblioteca.dto;
 
+import lombok.Data;
 import projetoBiblioteca.projetoBiblioteca.model.Livro;
+import projetoBiblioteca.projetoBiblioteca.model.StatusLivro;
 
+@Data
 public class LivroDTO {
     private  String titulo;
     private String autor;
     private Long isbn;
     private String genero;
+    private StatusLivro status;
 
     public static LivroDTO fromEntity(Livro livro) {
         LivroDTO dto = new LivroDTO();
@@ -14,6 +18,7 @@ public class LivroDTO {
         dto.setAutor(livro.getAutor());
         dto.setIsbn(livro.getIsbn());
         dto.setGenero(livro.getGenero());
+        dto.setStatus(livro.getStatus());
         return dto;
     }
     public static Livro fromDTO(LivroDTO dto) {
@@ -22,38 +27,9 @@ public class LivroDTO {
         livro.setAutor(dto.getAutor());
         livro.setIsbn(dto.getIsbn());
         livro.setGenero(dto.getGenero());
+        livro.setStatus(dto.getStatus());
         return livro;
     }
 
-    public String getAutor() {
-        return autor;
-    }
-
-    public void setAutor(String autor) {
-        this.autor = autor;
-    }
-
-    public Long getIsbn() {
-        return isbn;
-    }
-
-    public void setIsbn(Long isbn) {
-        this.isbn = isbn;
-    }
-
-    public String getGenero() {
-        return genero;
-    }
-
-    public void setGenero(String genero) {
-        this.genero = genero;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
+    // Getters and Setters
 }
